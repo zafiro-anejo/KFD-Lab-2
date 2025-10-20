@@ -32,4 +32,20 @@ fun main() {
     } catch (e: Exception) {
         println("Ошибка: ${e.message}")
     }
+
+    data class Person(val name: String, val age: Int, val contacts: List<String>)
+    data class Database(val host: String, val port: Int)
+    data class Config(val database: Database, val users: List<Person>)
+
+
+    val thirdX = Config(
+        database = Database("host", 8080),
+        users = listOf(
+            Person("firstPerson", 20, listOf("firstPerson@email.ru")),
+            Person("secondPerson", 70, listOf("secondPerson@email.ru", "secondPerson@gmail.com"))
+        )
+    )
+
+    val thirdY = TomlSerialization.encodeToString(thirdX)
+    println(thirdY)
 }
